@@ -1,7 +1,7 @@
-import Image from "next/image";
+import ColorsDemo from "./_components/colors";
 
 export default async function Home() {
   return (
-    <div>React Application Architecture</div>
+    <div><ColorsDemo/></div>
   );
 }
