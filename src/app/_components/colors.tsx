@@ -48,7 +48,7 @@ const colors: Record<string, string> = {
     "gradient-second": "bg-gradient-second",
 };
     return (
-        <div className="flex flex-wrap justify-center p-4 gap-4" dir="ltr">
+        <div className="flex flex-wrap justify-center p-4 gap-4" dir="ltr" lang="en">
             {
                 Object.entries(colors).map(([name,color])=>
                 (<div key={name} className={`${color} w-96 h-96 flex items-center justify-center uppercase rounded-xl shadow`}>

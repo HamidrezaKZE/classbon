@@ -68,3 +68,15 @@
     --color-gradient-first: var(--clb-c-gradient-first);
     --color-gradient-second: var(--clb-c-gradient-second);
 }
+
+
+/* Font*/
+@layer base{
+    body{
+        font-family: var(--font-yekanbakh);
+    }
+
+    :lang(en){
+        font-family: var(--font-figtree);
+    }
+}
