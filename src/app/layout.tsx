@@ -2,6 +2,8 @@
 import "./globals.css";
 import {Figtree} from "next/font/google"
 import localFont from "next/font/local"
+import { Header } from "./_components/header/header";
+import { Footer } from "./_components/footer/footer";
 
 const figtree = Figtree({
   display:"swap",
@@ -60,12 +62,12 @@ export default async function RootLayout({
   return (
     <html
       dir="rtl"
-      className={` h-full antialiased ${figtree.variable} ${yekan.variable}`}
+      className={`dark h-full antialiased ${figtree.variable} ${yekan.variable}`}
     >
-      <body className="flex flex-col min-h-screen font-bold uppercase">
-      <header className="bg-gray-200 flex items-center justify-center h-20">دوره معماری ری‌اکت 2</header>
+      <body className="min-h-screen grid grid-rows-[80px_1fr_auto] justify-center items-center dark:bg-base-100 dark:text-base-content">
+      <Header/>
       <div className="flex-1 flex">{children}</div>
-      <footer className="bg-gray-200 flex items-center justify-center h-20"> footer</footer>
+      <Footer/>
       </body>
     </html>
   );
