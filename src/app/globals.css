@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *) );
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
     --current: currentColor;
@@ -86,7 +86,7 @@
     --color-base-200: var(--clb-c-base-200);
     --color-base-300: var(--clb-c-base-300);
 
-     /* Base content */
+    /* Base content */
     --color-base-content: var(--clb-c-base-content);
 }
 
@@ -102,8 +102,16 @@
     }
 }
 
-@layer utilities{
+@layer utilities {
     .container {
         margin: 0 auto;
+    }
+
+    .bg-hero-pattern {
+        background-image: url('/images/tile.svg');
+    }
+
+    .gradient {
+        @apply bg-gradient-to-r from-gradient-first to-gradient-second text-transparent bg-clip-text;
     }
 }

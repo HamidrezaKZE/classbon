@@ -64,9 +64,9 @@ export default async function RootLayout({
       dir="rtl"
       className={`dark h-full antialiased ${figtree.variable} ${yekan.variable}`}
     >
-      <body className="min-h-screen grid grid-rows-[80px_1fr_auto] justify-center items-center dark:bg-base-100 dark:text-base-content">
+      <body className="min-h-screen grid grid-rows-[80px_1fr_auto] dark:bg-base-100 dark:text-base-content">
       <Header/>
-      <div className="flex-1 flex">{children}</div>
+      <main>{children}</main>
       <Footer/>
       </body>
     </html>
