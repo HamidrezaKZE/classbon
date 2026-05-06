@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "../tailwind/components/components.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -112,6 +113,6 @@
     }
 
     .gradient {
-        @apply bg-gradient-to-r from-gradient-first to-gradient-second text-transparent bg-clip-text;
+        @apply bg-linear-to-r from-gradient-first to-gradient-second text-transparent bg-clip-text;
     }
 }
