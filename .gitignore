@@ -43,3 +43,5 @@ next-env.d.ts
 
 # fonts with license
 /public/fonts/yekanbakh
+*storybook.log
+storybook-static
