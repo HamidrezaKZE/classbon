@@ -32,5 +32,19 @@
     &-ghost {
         @apply dark:border-white/30 dark:bg-white/30 dark:text-base-300;
     }
-    /* ... size variants unchanged ... */
-}
+
+    &-xs {
+        @apply h-5 text-xs font-bold
+    }
+
+    &-sm {
+        @apply h-6 text-sm
+    }
+
+    &-md {
+        @apply h-7 text-base
+    }
+
+    &-lg {
+        @apply h-8 text-lg
+    }}

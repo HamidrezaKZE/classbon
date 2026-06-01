@@ -2,68 +2,104 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Loading } from "./loading";
 
 const meta: Meta<typeof Loading> = {
-    component: Loading,
-    tags: ["autodocs"],
-    decorators: [
-        (Story) => {
-            document.documentElement.classList.add('dark');
-            return <Story />
-        }
-    ]
-}
+  title: "_components/Loading",
+  component: Loading,
+  tags: ["autodocs"],
+  decorators: [
+    (Story) => {
+      document.documentElement.classList.add("dark");
+      return <Story />;
+    },
+  ],
+  parameters: {
+    layout: "centered",
+  },
+  argTypes: {
+    type: {
+      control: { type: "select" },
+      options: ["spinner", "ring"],
+    },
+    size: {
+      control: { type: "select" },
+      options: ["tiny", "small", "normal", "large"],
+    },
+    variant: {
+      control: { type: "select" },
+      options: [
+        "neutral",
+        "primary",
+        "secondary",
+        "accent",
+        "success",
+        "info",
+        "warning",
+        "error",
+      ],
+    },
+  },
+};
 
 export default meta;
 
 type Story = StoryObj<typeof Loading>;
 
 export const LoadingSpinner: Story = {
-    render: () => (
-        <>
-            <Loading size="tiny" />
-            <Loading size="small" />
-            <Loading size="normal" />
-            <Loading size="large" />
-        </>
-    ),
+  render: () => (
+    <>
+      <Loading size="tiny" />
+      <Loading size="small" />
+      <Loading size="normal" />
+      <Loading size="large" />
+    </>
+  ),
 };
 
 export const LoadingSpinnerWithColors: Story = {
-    render: () => (
-        <>
-            <Loading size="normal" variant="neutral" />
-            <Loading size="normal" variant="primary" />
-            <Loading size="normal" variant="secondary" />
-            <Loading size="normal" variant="accent" />
-            <Loading size="normal" variant="success" />
-            <Loading size="normal" variant="info" />
-            <Loading size="normal" variant="warning" />
-            <Loading size="normal" variant="error" />
-        </>
-    ),
+  render: () => (
+    <>
+      <Loading size="normal" variant="neutral" />
+      <Loading size="normal" variant="primary" />
+      <Loading size="normal" variant="secondary" />
+      <Loading size="normal" variant="accent" />
+      <Loading size="normal" variant="success" />
+      <Loading size="normal" variant="info" />
+      <Loading size="normal" variant="warning" />
+      <Loading size="normal" variant="error" />
+    </>
+  ),
 };
 
 export const LoadingRing: Story = {
-    render: () => (
-        <>
-            <Loading size="tiny" type="ring" />
-            <Loading size="small" type="ring" />
-            <Loading size="normal" type="ring" />
-            <Loading size="large" type="ring" />
-        </>
-    ),
+  render: () => (
+    <>
+      <Loading size="tiny" type="ring" />
+      <Loading size="small" type="ring" />
+      <Loading size="normal" type="ring" />
+      <Loading size="large" type="ring" />
+    </>
+  ),
 };
 
 export const LoadingRingWithColors: Story = {
-    render: () => (
-        <>
-            <Loading size="normal" type="ring" variant="neutral" />
-            <Loading size="normal" type="ring" variant="primary" />
-            <Loading size="normal" type="ring" variant="secondary" />
-            <Loading size="normal" type="ring" variant="accent" />
-            <Loading size="normal" type="ring" variant="success" />
-            <Loading size="normal" type="ring" variant="info" />
-            <Loading size="normal" type="ring" variant="warning" />
-            <Loading size="normal" type="ring" variant="error" />
-        </>
-    ),
+  render: () => (
+    <>
+      <Loading size="normal" type="ring" variant="neutral" />
+      <Loading size="normal" type="ring" variant="primary" />
+      <Loading size="normal" type="ring" variant="secondary" />
+      <Loading size="normal" type="ring" variant="accent" />
+      <Loading size="normal" type="ring" variant="success" />
+      <Loading size="normal" type="ring" variant="info" />
+      <Loading size="normal" type="ring" variant="warning" />
+      <Loading size="normal" type="ring" variant="error" />
+    </>
+  ),
+};
+
+// Interactive loading for testing all props
+export const Interactive: Story = {
+  args: {
+    size: "normal",
+    type: "spinner",
+    variant: "primary",
+  },
 };
