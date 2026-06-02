@@ -39,7 +39,8 @@ export const CourseCard: React.FC<CourseCardProps> = ({
           <Price price={basePrice} size="small"/>
         </div>
       </div>
-      <Link href={`/course/${slug}`} className="card-footer justify-center animated-icon">
+      {/* TODO: check courses or course */}
+      <Link href={`/courses/${slug}`} className="card-footer justify-center animated-icon">
         مشاهده جزئیات دوره
         <IconArrowLeft fill="currentColor"/>
       </Link>
