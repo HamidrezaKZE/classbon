@@ -1,6 +1,7 @@
 import { Badge } from "@/app/_components/badge";
 import { IconArrowLeft, IconClock } from "@/app/_components/icons";
 import { Price } from "@/app/_components/price/price";
+import { API_URL } from "@/configs/global";
 import { CourseSummary } from "@/types/course-summary.interface";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,7 +22,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({
     <div className="card">
       <figure>
         <Image
-          src={`https://api.classbon.com/api/picture/${coverImageId}`}
+          src={`${API_URL}/picture/${coverImageId}`}
           alt={title}
           width={550}
           height={327}
