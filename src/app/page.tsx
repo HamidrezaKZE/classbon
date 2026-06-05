@@ -8,14 +8,10 @@ import { IconArrowLeftFill } from "./_components/icons";
 import { BlogPostSummary } from "@/types/blog-post-summary.interface";
 import { BlogPostCardList } from "./(blog)/_components/blog-post-card";
 import { API_URL } from "@/configs/global";
+import { Suspense } from "react";
+import { CardPlaceholder } from "./_components/placeholders";
 
-async function getNewestCourses(count: number): Promise<CourseSummary[]> {
-  const res = await fetch(
-    `${API_URL}/courses/newest/${count}`,
-    { next: { revalidate: 60 * 60 * 24 } },
-  );
-  return res.json();
-}
+
 async function getNewestPosts(count: number): Promise<BlogPostSummary[]> {
   const res = await fetch(`${API_URL}/blog/newest/${count}`, {
     next: { revalidate: 60 * 60 * 24 },
@@ -24,10 +20,10 @@ async function getNewestPosts(count: number): Promise<BlogPostSummary[]> {
 }
 export default async function Home() {
   // const newestCourses = await getNewestCourses(4);
-  const newestCoursesData = getNewestCourses(4);
+  // const newestCoursesData = getNewestCourses(4);
   const newestBlogPostsData = getNewestPosts(4);
-  const [newestCourses, newestBlogPosts] = await Promise.all([
-    newestCoursesData,
+  const [ newestBlogPosts] = await Promise.all([
+    // newestCoursesData,
     newestBlogPostsData,
   ]);
 
@@ -46,7 +42,8 @@ export default async function Home() {
           <h2 className="text-2xl font-extrabold">تازه‌ترین دوره‌های آموزشی</h2>
           <p> برای به‌روز موندن، یاد گرفتن نکته‌های تازه ضروری‌ه!</p>
         </div>
-        <CourseCardList courses={newestCourses} />
+        <Suspense fallback={<CardPlaceholder count={4} className="mt-5"/>}>
+        <CourseCardList courses={[]} /></Suspense>
       </section>
       <section className="px-2 my-40">
         <div className="relative pt-0 text-center">
