@@ -1,7 +1,43 @@
+import { API_URL } from "@/configs/global";
+import type { CourseDetails } from "@/types/courses-details.interface";
 
-export default async function CourseDetails ()  {
-  return (
-    <div className="text-5xl flex justify-center items-center w-screen">CourseDetails</div>
-  )
+export async function generateStaticParams() {
+  const slugs = await fetch(`${API_URL}/courses/slugs`).then((res) =>
+    res.json(),
+  );
+  return (slugs as string[]).map((slug) => ({ slug: encodeURIComponent(slug) }));
 }
 
+async function getCourse(slug: string): Promise<CourseDetails> {
+  const res = await fetch(`${API_URL}/courses/${slug}`);
+  return res.json();
+}
+
+export default async function CourseDetails({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const decodedSlug = decodeURIComponent(slug);
+  const course = await getCourse(decodedSlug);
+  // console.log("params: ", await params);        // ✅
+  // console.log("course data: ", courseData);     // ✅
+  return (
+    <div className="h-96 container grid grid-cols-10 grid-rows-[1fr 1fr] gap-10 py-10">
+      <div className="dark:bg-primary pointer-events-none absolute right-0 aspect-square w-1/2   rounded-full opacity-10 blur-3xl"></div>
+      <div className="col-span-10 xl:col-span-7">
+        <h1 className="text-center xl:text-right text-2xl lg:text-3xl xl:text-4xl font-black leading-10">
+          {course.title}
+        </h1>
+        <h2 className="mt-4 text-center lg:text-right text-lg leading-9">
+          {course.subTitle}
+        </h2>
+        <div className="mt-5">video player component</div>
+      </div>
+      <div className="col-span-10 xl:col-span-3 bg-secondary"></div>
+      <div className="col-span-10 xl:col-span-6 bg-info"></div>
+      <div className="col-span-10 xl:col-span-4 bg-warning"></div>
+    </div>
+  );
+}
