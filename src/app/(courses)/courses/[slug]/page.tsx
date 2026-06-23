@@ -1,3 +1,5 @@
+import { Progress } from "@/app/_components/progress";
+import { Rating } from "@/app/_components/rating";
 import { API_URL } from "@/configs/global";
 import type { CourseDetails } from "@/types/courses-details.interface";
 
@@ -5,7 +7,7 @@ export async function generateStaticParams() {
   const slugs = await fetch(`${API_URL}/courses/slugs`).then((res) =>
     res.json(),
   );
-  return (slugs as string[]).map((slug) => ({ slug: encodeURIComponent(slug) }));
+  return (slugs as string[]).map((slug) => ({ slug }));
 }
 
 async function getCourse(slug: string): Promise<CourseDetails> {
@@ -19,8 +21,10 @@ export default async function CourseDetails({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const decodedSlug = decodeURIComponent(slug);
-  const course = await getCourse(decodedSlug);
+  // const decodedSlug = decodeURIComponent(slug);
+  // const course = await getCourse(decodedSlug)
+  const course = await getCourse(slug);
+
   // console.log("params: ", await params);        // ✅
   // console.log("course data: ", courseData);     // ✅
   return (
@@ -35,7 +39,13 @@ export default async function CourseDetails({
         </h2>
         <div className="mt-5">video player component</div>
       </div>
-      <div className="col-span-10 xl:col-span-3 bg-secondary"></div>
+      <div className="col-span-10 xl:col-span-3 bg-secondary">
+        <Rating rate={3} size="small" variant="info" />
+        <Progress value={75} />
+        <Progress value={75} variant="warning" size="tiny"/>
+        <Progress value={75} variant="error" size="tiny"/>
+        <Progress value={75} variant="info" size="tiny"/>
+      </div>
       <div className="col-span-10 xl:col-span-6 bg-info"></div>
       <div className="col-span-10 xl:col-span-4 bg-warning"></div>
     </div>
