@@ -1,68 +1,71 @@
 .progress {
-    @apply relative w-full appearance-none overflow-hidden h-2 rounded-lg bg-base-content/20;
+    @apply relative w-full appearance-none overflow-hidden h-2 rounded-lg dark:bg-base-content/20;
 
     &::-moz-progress-bar {
-        @apply bg-base-content;
+        @apply dark:bg-base-content;
     }
     &-primary::-moz-progress-bar {
-        @apply bg-primary;
+        @apply dark:bg-primary;
     }
     &-secondary::-moz-progress-bar {
-        @apply bg-secondary;
+        @apply dark:bg-secondary;
     }
     &-accent::-moz-progress-bar {
-        @apply bg-accent;
+        @apply dark:bg-accent;
     }
     &-info::-moz-progress-bar {
-        @apply bg-info;
+        @apply dark:bg-info;
     }
     &-success::-moz-progress-bar {
-        @apply bg-success;
+        @apply dark:bg-success;
     }
     &-warning::-moz-progress-bar {
-        @apply bg-warning;
+        @apply dark:bg-warning;
     }
     &-error::-moz-progress-bar {
-        @apply bg-error;
+        @apply dark:bg-error;
     }
 
     &::-webkit-progress-bar {
         @apply bg-transparent rounded-lg;
     }
     &::-webkit-progress-value {
-        @apply bg-base-content rounded-lg;
+        @apply dark:bg-base-content rounded-lg;
     }
     &-primary::-webkit-progress-value {
-        @apply bg-primary;
+        @apply dark:bg-primary;
     }
     &-secondary::-webkit-progress-value {
-        @apply bg-secondary;
+        @apply dark:bg-secondary;
     }
     &-accent::-webkit-progress-value {
-        @apply bg-accent;
+        @apply dark:bg-accent;
     }
     &-info::-webkit-progress-value {
-        @apply bg-info;
+        @apply dark:bg-info;
     }
     &-success::-webkit-progress-value {
-        @apply bg-success;
+        @apply dark:bg-success;
     }
     &-warning::-webkit-progress-value {
-        @apply bg-warning;
+        @apply dark:bg-warning;
     }
     &-error::-webkit-progress-value {
-        @apply bg-error;
+        @apply dark:bg-error;
     }
 
     &-xs {
         @apply h-1;
     }
+
     &-sm {
         @apply h-2;
     }
+
     &-md {
         @apply h-3;
     }
+
     &-lg {
         @apply h-4;
     }
