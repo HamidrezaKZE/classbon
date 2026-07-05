@@ -1,11 +1,11 @@
 import { API_URL } from "@/configs/global";
 import type { CourseDetails } from "@/types/courses-details.interface";
-import { CourseAside } from "./components/course-aside/course-aside";
+import { CourseAside } from "./_components/course-aside/course-aside";
 import { Tab } from "@/types/tab.type";
 import { Tabs } from "@/app/_components/tabs";
 import { Accordion } from "@/app/_components/accordion";
 import { Accordion as AccordionType } from "@/types/accordion";
-import CourseComments from "./components/course-comments";
+import CourseComments from "./_components/course-comments";
 
 export async function generateStaticParams() {
   try {

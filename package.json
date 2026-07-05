@@ -11,6 +11,8 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.101.2",
+    "@tanstack/react-query-devtools": "^5.101.2",
     "autoprefixer": "^10.5.0",
     "axios": "^1.18.1",
     "classnames": "^2.5.1",
