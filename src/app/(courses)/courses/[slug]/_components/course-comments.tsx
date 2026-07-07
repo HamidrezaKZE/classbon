@@ -1,16 +1,22 @@
 "use client";
-import { createData } from "@/core/http-service/http-service";
-import { Problem } from "@/types/http-errors.interface";
-import { useEffect } from "react";
+import { useParams } from "next/navigation";
+import { useCourseComments } from "../_api/get-comments";
 
 const CourseComments = () => {
-  // useEffect(() => {
-  //   createData("/bad-request", {}).catch((err: Problem) => {
-  //     console.error("خطا:", err.detail);
-  //     // مثلاً: setErrorMessage(err.detail)
-  //   });
-  // }, []);
-  return <></>;
+  const { slug } = useParams();
+  const { data: comments } = useCourseComments({
+    params: { slug: slug as string, page: 1 },
+  });
+  
+  return (
+    <>
+      {comments?.data.map((p) => (
+        <p key={p.id} className="mb-8">
+          {p.commentText}
+        </p>
+      ))}
+    </>
+  );
 };
 
-export default CourseComments
+export default CourseComments;

@@ -8,6 +8,6 @@ export interface CourseComment {
   isResponse: boolean;
 }
 export interface CourseCommentList {
-  data: Comment[];
+  data: CourseComment[];
   nextPage: number;
 }
