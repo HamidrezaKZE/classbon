@@ -1,20 +1,21 @@
 "use client";
 import { useParams } from "next/navigation";
 import { useCourseComments } from "../_api/get-comments";
+import { Comment } from "@/app/_components/comment/comment";
+import { TextPlaceholder } from "@/app/_components/placehoders";
 
 const CourseComments = () => {
   const { slug } = useParams();
-  const { data: comments } = useCourseComments({
+  const { data: comments, isLoading } = useCourseComments({
     params: { slug: slug as string, page: 1 },
   });
-  
+
   return (
     <>
-      {comments?.data.map((p) => (
-        <p key={p.id} className="mb-8">
-          {p.commentText}
-        </p>
+      {comments?.data.map((comment) => (
+        <Comment key={`comment-${comment.id}`} {...comment} variant="info" />
       ))}
+      {isLoading && <TextPlaceholder />}
     </>
   );
 };
