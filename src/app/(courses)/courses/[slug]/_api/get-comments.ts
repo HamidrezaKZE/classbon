@@ -1,6 +1,6 @@
 import { readData } from "@/core/http-service/http-service";
 import { CourseCommentList } from "../_types/course-comment.interface";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 type GetCommentsOptions = {
   params: {
@@ -18,11 +18,14 @@ const getComments = ({
 };
 
 export const useCourseComments = ({ params }: GetCommentsOptions) => {
-  const { data, isError, error, isLoading } = useQuery({
-    queryKey: ["courseComments", params.slug, params.page],
-    queryFn: () => getComments({ params }),
-    staleTime: 5 * 60 * 60 * 1000,
-    gcTime:    6 * 60 * 60 * 1000,
-  });
-  return { data, isError, error, isLoading };
+  const { data, error, isFetchingNextPage, fetchNextPage, isFetching, hasNextPage, refetch } =
+    useInfiniteQuery({
+      queryKey: ["courseComments", params.slug, params.page],
+      queryFn: ({pageParam}) => getComments({ params: { ...params, page: pageParam }}),
+      getNextPageParam: (lastPage) => lastPage.nextPage,
+      initialPageParam: 1,
+      staleTime: 5 * 60 * 60 * 1000,
+      gcTime: 6 * 60 * 60 * 1000,
+    });
+  return { data, error, isFetchingNextPage, fetchNextPage, isFetching, hasNextPage, refetch };
 };
