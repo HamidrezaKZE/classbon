@@ -6,6 +6,8 @@ import { Tabs } from "@/app/_components/tabs";
 import { Accordion } from "@/app/_components/accordion";
 import { Accordion as AccordionType } from "@/types/accordion";
 import CourseComments from "./_components/course-comments";
+import { CourseCurriculum } from "./_components/curriculum";
+import { CourseChapter } from "@/types/course-chapter.interface";
 
 export async function generateStaticParams() {
   try {
@@ -27,6 +29,11 @@ async function getCourse(slug: string): Promise<CourseDetails> {
   return res.json();
 }
 
+async function getCurriculum(slug: string): Promise<CourseChapter[]> {
+  const res = await fetch(`${API_URL}/courses/${slug}/curriculum`);
+  return res.json();
+}
+
 export default async function CourseDetails({
   params,
 }: {
@@ -35,12 +42,20 @@ export default async function CourseDetails({
   const { slug } = await params;
   // const decodedSlug = decodeURIComponent(slug);
   // const course = await getCourse(decodedSlug)
-  const course = await getCourse(slug);
-  const faqs: AccordionType[] = course.frequentlyAskedQuestions.map((faq) => ({
-    id: faq.id,
-    title: faq.question,
-    content: faq.answer,
-  }));
+  const courseData = getCourse(slug);
+  const courseCurriculumData = getCurriculum(slug);
+  const [course, courseCurriculum] = await Promise.all([
+    courseData,
+    courseCurriculumData,
+  ]);
+
+  const faqs: AccordionType[] = course.frequentlyAskedQuestions.map(
+    (faq: { id: number; question: string; answer: string }) => ({
+      id: faq.id,
+      title: faq.question,
+      content: faq.answer,
+    }),
+  );
 
   // console.log("params: ", await params);        // ✅
   // console.log("course data: ", courseData);     // ✅
@@ -52,7 +67,7 @@ export default async function CourseDetails({
     },
     {
       label: "دیدگاه‌ها و پرسش‌ها",
-      content: <CourseComments/>,
+      content: <CourseComments />,
     },
     {
       label: "سوالات متداول",
@@ -77,7 +92,12 @@ export default async function CourseDetails({
       <div className="col-span-10 xl:col-span-6">
         <Tabs tabs={tabs} />
       </div>
-      <div className="col-span-10 xl:col-span-4 bg-warning"></div>
+      <div className="col-span-10 xl:col-span-4">
+        <div className="sticky top-5">
+          <h2 className="h2 mb-5 text-xl">سرفصل‌های دوره</h2>
+          <CourseCurriculum data={courseCurriculum} />
+        </div>
+      </div>
     </div>
   );
 }
